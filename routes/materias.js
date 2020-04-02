@@ -7,7 +7,7 @@ router.get('/', (req, res, next) => {
   mysql.getConnection((error, conn) => {
     if (error) { return res.status(500).send({ error: error }) }
     conn.query(
-      'SELECT * FROM materias;',
+      'SELECT * FROM base_disciplinas_ufabc;',
       (error, result, fields) => {
         if (error) { return res.status(500).send({ error: error}) }
         const response = {
@@ -38,7 +38,7 @@ router.post('/', (req, res, next) => {
   mysql.getConnection((error, conn) => {
     if (error) { return res.status(500).send({ error: error }) }
     conn.query(
-      'INSERT INTO materias (nome, creditos, descricao) VALUES (?, ?, ?)',
+      'INSERT INTO base_disciplinas_ufabc (nome, creditos, descricao) VALUES (?, ?, ?)',
       [req.body.nome, req.body.creditos, req.body.descricao],
       (error, result, field) => {
         conn.release();
@@ -69,7 +69,7 @@ router.get('/:id_materias', (req, res, next) => {
   mysql.getConnection((error, conn) => {
     if (error) { return res.status(500).send({ error: error }) }
     conn.query(
-      'SELECT * FROM materias WHERE id_materias = ?;',
+      'SELECT * FROM base_disciplinas_ufabc WHERE id_materias = ?;',
       [req.params.id_materias],
       (error, result, field) => {
         conn.release();
@@ -107,7 +107,7 @@ router.patch('/', (req, res, next) => {
   mysql.getConnection((error, conn) => {
     if (error) { return res.status(500).send({ error: error })}
     conn.query(
-      `UPDATE materias
+      `UPDATE base_disciplinas_ufabc
         SET nome              = ?,
             creditos          = ?,
             descricao         = ?
@@ -147,7 +147,7 @@ router.delete('/', (req, res, next) => {
   mysql.getConnection((error, conn) => {
     if (error) { return res.status(500).send({ error: error })}
     conn.query(
-      'DELETE FROM materias WHERE id_materias = ?',
+      'DELETE FROM base_disciplinas_ufabc WHERE id_materias = ?',
       [req.body.id_materias],
       (error, result, fields) => {
         conn.release();
